@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Neural Style Transfer</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+	<style>
+		* {
+		  box-sizing: border-box;
+		}
+		
+		body {
+		  background-color: #f1f1f1;
+		  padding: 20px;
+		  font-family: Arial;
+		}
+		
+		/* Center website */
+		.main {
+		  max-width: 1000px;
+		  margin: auto;
+		}
+		
+		h1 {
+		  font-size: 50px;
+		  word-break: break-all;
+		  padding-top: 2rem;
+		  
+		  
+		}
+		h3{
+			font-size: 20px;
+		}
+
+		h2 {
+			padding-top: 2rem;
+		}
+		
+		.row {
+		  margin: 8px -16px;
+		}
+		
+		/* Add padding BETWEEN each column */
+		.row,
+		.row > .column {
+		  padding: 8px;
+		}
+		
+		/* Create four equal columns that floats next to each other */
+		.column {
+		  float: right;
+		  width: 25%;
+		}
+		
+		/* Clear floats after rows */ 
+		.row:after {
+		  content: "";
+		  display: table;
+		  clear: both;
+		}
+		
+		/* Content */
+		.content {
+		  background-color: white;
+		  padding: 10px;
+		}
+		
+		/* Responsive layout - makes a two column-layout instead of four columns */
+		@media screen and (max-width: 900px) {
+		  .column {
+			width: 50%;
+		  }
+		}
+		
+		/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+		@media screen and (max-width: 600px) {
+		  .column {
+			width: 100%;
+		  }
+		}
+		</style>
+</head>
+<body>
+	<nav class="navbar navbar-dark" style="background-color: #1eeee4;">
+        <div class="container">
+            <a href="/" class="navbar-brand">
+            <img src="{{url_for('static', filename='logo3.jpg')}}" alt="" width="60" height="40">
+            <span> Neural Style Transfer</span>
+            </a>
+
+        </div>
+    </nav>
+    
+	
+	<h1 class="display-11" align="center">Upload Your Image</h1>
+	<form align="center" id="upload-form" action="{{url_for('upload')}}" method= "POST" enctype="multipart/form-data">
+		<input align="center" type="file" name="file" accept="image/*" multiple>
+		<input align="center" type="submit" value="Upload">
+		<br><br>
+
+		<div>
+			<label for="style">Choose an image style:</label>
+			<select id="style" name="style">
+				<!-- Torch pretrained models from https://github.com/ProGamerGov/Torch-Models-->
+				<!-- And also "https://cs.stanford.edu/people/jcjohns/fast-neural-style/models//instance_norm/candy.t7"-->
+				<option value="Fire_Style_22000_Iterations.t7">Fire Style</option>
+				<option value="gold_black_2700.t7">Gold Black Style</option>
+				<option value="pink_style_1800.t7">Pink Style</option>
+				<!-- <option value="triangle_style_1000.t7">Triangle Style</option> -->
+				<option value="flame_style_4500.t7">Flame Style</option>
+				<option value="landscape_style_11600.t7">Landscape Style</option>
+				<option value="rain_style_iter_4000.t7">Rain Style</option>
+				<option value="starry_night_2500.t7">Starry Night Style</option>
+				<option value="mosaic.t7">Mosaic Style</option>
+				<!-- <option value="the_scream.t7">The Scream Style</option> -->
+				<option value="the_wave.t7">The Wave Style</option>
+	  		</select>
+		</div>
+		
+		<div class="main">
+
+
+			<hr>
+			
+			<h2>Types of Neural Styles</h2>
+			
+			
+			<!-- Portfolio Gallery Grid -->
+			<div class="row">
+			  <div class="column">
+				<div class="content">
+				  <img src="{{url_for('static', filename='Fire Style.jpeg')}}" alt="Mountains" style="width:100%">
+				  <h3 align="center" >Fire Style</h3>
+				</div>
+			  </div>
+			  <div class="column">
+				<div class="content">
+				<img src="{{url_for('static', filename='Flame Style.jpeg')}}" alt="Lights" style="width:100%">
+				  <h3 align="center" >Flame Style</h3>
+				</div>
+			  </div>
+			  <div class="column">
+				<div class="content">
+				<img src="{{url_for('static', filename='Gold Black Style.jpeg')}}" alt="Nature" style="width:100%">
+				  <h3 align="center" >Gold Black Style</h3>
+				</div>
+			  </div>
+			  <div class="column">
+				<div class="content">
+				<img src="{{url_for('static', filename='Landscape Style.jpeg')}}" alt="Mountains" style="width:100%">
+				  <h3 align="center" >Landscape Style</h3>
+				</div>
+			  </div>
+			  <div class="column">
+				<div class="content">
+				<img src="{{url_for('static', filename='Mosaic Style.jpeg')}}" alt="Mountains" style="width:100%">
+				  <h3 align="center" >Mosaic Style</h3>
+				</div>
+			  </div>
+			  <div class="column">
+				<div class="content">
+				<img src="{{url_for('static', filename='Pink Style.jpeg')}}" alt="Mountains" style="width:100%">
+				  <h3 align="center" >Pink Style</h3>
+				</div>
+			  </div>
+			  <div class="column">
+				<div class="content">
+				<img src="{{url_for('static', filename='Rain Style.jpeg')}}" alt="Mountains" style="width:100%">
+				  <h3 align="center" >Rain Style</h3>
+				</div>
+			  </div>
+			  <div class="column">
+				<div class="content">
+				<img src="{{url_for('static', filename='Starry Night Style.jpeg')}}" alt="Mountains" style="width:100%">
+				  <h3 align="center" >Starry Night Style</h3>
+				</div>
+			  </div>
+			  <div class="column">
+				<div class="content">
+				<img src="{{url_for('static', filename='The Wave Style.jpeg')}}" alt="Mountains" style="width:100%">
+				  <h3 align="center" >The Wave Style</h3>
+				</div>
+			  </div>
+			
+			  
+			  
+			<!-- END GRID -->
+			</div>
+			
+			<div class="content">
+			  <img src="{{url_for('static', filename='Person.jpg')}}" alt="Bear" style="width:100%">
+			  <h3 align="center" >Original Image</h3>
+			</div>
+			
+			<!-- END MAIN -->
+			</div>
+</body>
+</html>
