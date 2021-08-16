@@ -15,11 +15,6 @@ This project was aimed to deploy a *deep learning* application to recognise pers
  - dlib
 
 
-## Dataset
-
-The dataset consist of images of 15 celebrities, 100 for each for face recognition and consists of images of 7 types of emotions, 1300 for each emotion for emotion detection.
-
-
 ## Approach
 
 
@@ -33,14 +28,11 @@ The dataset consist of images of 15 celebrities, 100 for each for face recogniti
 
 
 ## Deployed Web Application
-
-
-
-
+![repo9](https://user-images.githubusercontent.com/64823050/129594843-a8833497-309d-4d56-b100-4b89744cdaae.jpg)
 
 
 ## Result
-
+![repo10](https://user-images.githubusercontent.com/64823050/129594939-c8959a58-1d2d-4307-b2ab-ab3351cc3030.jpg)
 
 
 ## References
