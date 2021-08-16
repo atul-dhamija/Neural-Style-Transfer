@@ -1,6 +1,6 @@
 # Neural Style Transfer WebApp
 
-This project was aimed to deploy a *deep learning* application to recognise person's face and emotion.
+This project was aimed to deploy a deep learning application to style an image.
 
 
 ## Dependencies
