@@ -29,5 +29,5 @@ You can install Python dependencies using ``` pip install -r requirements.txt ``
 
 ## References
 
-https://towardsdatascience.com/building-deploying-a-neural-style-transfer-app-with-pre-trained-models-661bbefc74cd?gi=ecc2d30d0c96
+[Neural Style Transfer](https://towardsdatascience.com/building-deploying-a-neural-style-transfer-app-with-pre-trained-models-661bbefc74cd?gi=ecc2d30d0c96)
 
